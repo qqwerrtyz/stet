@@ -453,10 +453,10 @@ export default function Home() {
       <footer className="footer">
         <div className="container footer__inner">
           <a className="logo" href="#">
-            <span className="logo__icon">✓</span>
+      
             <span>
-              <span className="logo__title">Приемка PRO</span>
-              <span className="logo__subtitle">Экспертная приемка квартир</span>
+              <span className="logo__title">СТЕТ</span>
+              <span className="logo__subtitle">независимые экспертизы</span>
             </span>
           </a>
 
