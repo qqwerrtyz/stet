@@ -20,9 +20,9 @@ export default function Home() {
       <header className="header">
         <div className="container header__inner">
           <a className="logo" href="#" onClick={closeMenu}>
-            <span className="logo__icon">✓</span>
+          
             <span>
-              <span className="logo__title">Приемка PRO</span>
+              <span className="logo__title">СТЕТ</span>
               <span className="logo__subtitle">независимые эксперты</span>
             </span>
           </a>
