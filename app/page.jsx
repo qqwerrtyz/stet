@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./globals.css";
+import Image from "next/image";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +16,40 @@ export default function Home() {
     alert("Заявка отправлена! Здесь можно подключить форму.");
   };
 
+  useEffect(() => {
+    // Кнопки открывают модалку
+    document.querySelectorAll(
+      'a.nav__mobile-button, a.header__button, a.button, a.photo-card__label, a.button.button--secondary.button--wide, a.button.button--white.button--wide'
+    ).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        if(modal) modal.style.display = 'flex';
+      });
+    });
+
+    // Закрытие крестиком
+    const closeBtn = document.querySelector('.modal-close');
+    if(closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        if(modal) modal.style.display = 'none';
+      });
+    }
+
+    // Телефон: клик показывает ссылку
+    const phoneWrapper = document.querySelector('.phone-wrapper');
+    if(phoneWrapper) {
+      const phone = phoneWrapper.querySelector('.phone');
+      const overlay = phoneWrapper.querySelector('.phone-overlay');
+      if(overlay && phone) {
+        overlay.addEventListener('click', () => {
+          phone.classList.add('active');
+        });
+      }
+    }
+  }, []); // пустой массив, чтобы скрипт выполнился только один раз на клиенте
+
+
   return (
     <>
       <header className="header">
@@ -22,8 +57,15 @@ export default function Home() {
           <a className="logo" href="#" onClick={closeMenu}>
           
             <span>
-              <span className="logo__title">СТЕТ</span>
-              <span className="logo__subtitle">независимые эксперты</span>
+ 
+              <div className="logoImageWrapper">
+                <Image
+                  className="logoImage"
+                  fill
+                  src="/logo.svg"
+                  alt="СТЭТ — строительные экспертизы"
+                />
+              </div>
             </span>
           </a>
 
@@ -52,6 +94,25 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Модальное окно */}
+      <div id="modal" className="modal">
+        <div className="modal-content">
+          <div className="modal-header">
+            <div className="modal-logo">
+              <Image src="/logo.svg" alt="СТЭТ" fill />
+            </div>
+            <button className="modal-close">×</button>
+          </div>
+          <div className="modal-body">
+            <p><a href="mailto:stet-kazan@mail.ru">stet-kazan@mail.ru</a></p>
+            <div className="phone-wrapper">
+              <a href="tel:+79625507555" className="phone">+7 962 550-75-55</a>
+              <div className="phone-overlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <main>
         <section className="hero">
           <div className="hero__decor hero__decor--orange"></div>
@@ -61,7 +122,7 @@ export default function Home() {
             <div className="hero__content">
               <div className="pill pill--teal">
                 <span>★</span>
-                Рейтинг 5.0 · 1000+ проверенных квартир
+                8000+ проверенных квартир
               </div>
 
               <h1>Не подписывайте акт приемки квартиры, пока её не проверит эксперт</h1>
@@ -78,57 +139,54 @@ export default function Home() {
 
               <div className="hero__stats">
                 <div className="stat-card">
-                  <strong>1000+</strong>
+                  <strong>8 000+</strong>
                   <span>квартир</span>
                 </div>
                 <div className="stat-card">
-                  <strong>10 000+</strong>
+                  <strong>95 000+</strong>
                   <span>дефектов</span>
                 </div>
                 <div className="stat-card">
-                  <strong>50 млн ₽</strong>
+                  <strong>40 млн ₽</strong>
                   <span>взыскано</span>
                 </div>
               </div>
             </div>
 
-            <div className="hero__visual">
-              <div className="photo-card photo-card--hero">
-                <div className="photo-card__room"></div>
 
-                <div className="expert">
-                  <div className="expert__head"></div>
-                  <div className="expert__body"></div>
-                  <div className="expert__tablet">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
 
-                <div className="laser-line laser-line--one"></div>
-                <div className="laser-line laser-line--two"></div>
-                <div className="defect-marker">Дефект</div>
-
-                <div className="photo-card__label">
-                  <small>Эксперт с планшетом</small>
-                  <b>Проверка квартиры</b>
-                </div>
-              </div>
-
-              <div className="floating-card floating-card--left">
-                <span className="check-icon">✓</span>
-                <b>100+ параметров</b>
-              </div>
-
-              <div className="floating-card floating-card--right">
-                <span className="doc-icon">▦</span>
-                <b>Отчет после осмотра</b>
-              </div>
+            <div className="mainImageWrapper">
+              <Image
+                className="mainImage"
+                src="/mainImg1.jpg"
+                alt="Замерщик квартиры"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           </div>
         </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <section className="section" id="services">
           <div className="container">
@@ -151,6 +209,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+      
 
         <section className="section section--white">
           <div className="container check-grid">
@@ -175,8 +235,8 @@ export default function Home() {
                   "Окна",
                   "Балконные конструкции",
                   "Геометрия стен",
-                  "Геометрия пола",
-                  "Геометрия потолка",
+                  "Ровность пола",
+                  "Прочность стяжки"
                 ].map((item) => (
                   <div key={item}>✓ {item}</div>
                 ))}
@@ -184,25 +244,22 @@ export default function Home() {
             </div>
 
             <div className="photo-card photo-card--large">
-              <div className="photo-card__room"></div>
-
-              <div className="expert expert--large">
-                <div className="expert__head"></div>
-                <div className="expert__body"></div>
-                <div className="expert__tablet">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+              {/* Основное фото */}
+              <div className="photo-card__image">
+                <Image
+                  src="/checkIncludes.jpg"
+                  alt="Проверка квартиры"
+                  fill
+                  className="photo-card__img"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 620px"
+                />
               </div>
 
-              <div className="laser-line laser-line--one"></div>
-              <div className="defect-marker">Проверка</div>
-
-              <div className="photo-card__label">
+              {/* Оставляем блоки с меткой и подписью */}
+              <a className="photo-card__label">
                 <small>Специалист во время осмотра</small>
                 <b>Профессиональная диагностика</b>
-              </div>
+              </a>
             </div>
           </div>
         </section>
@@ -220,17 +277,19 @@ export default function Home() {
 
             <div className="cards-grid cards-grid--4">
               {[
-                ["Трещины стен", "Фиксируем раскрытие, направление и зону дефекта."],
-                ["Кривые углы", "Проверяем геометрию лазерным уровнем и правилом."],
-                ["Неровный пол", "Находим перепады, которые мешают чистовой отделке."],
-                ["Продувание окон", "Проверяем примыкания, створки, откосы и монтажные швы."],
-                ["Плохая вентиляция", "Замеряем тягу и выявляем обратный поток."],
-                ["Некачественная электрика", "Осматриваем розетки, щиток, автоматы и линии."],
-                ["Нарушения гидроизоляции", "Проверяем мокрые зоны и риск протечек."],
-                ["Ошибки монтажа дверей", "Смотрим перекосы, зазоры, уплотнители и фурнитуру."],
-              ].map(([title, text], index) => (
+                ["Трещины стен", "Фиксируем раскрытие, направление и зону дефекта", "wall"],
+                ["Неровный пол", "Находим перепады, которые мешают чистовой отделке", "floor"],
+                ["Продувание окон", "Проверяем примыкания, створки, откосы и монтажные швы", "window"],
+                ["Плохая вентиляция", "Замеряем тягу и выявляем обратный поток.", "ventilation"],
+                ["Некачественная электрика", "Осматриваем розетки, щиток, автоматы и линии", "voltage"],
+                ["Ошибки монтажа дверей", "Смотрим перекосы, зазоры, уплотнители и фурнитуру", "door"],
+                ["Замер температуры", "Проверяем тепло на стенах и потолке", "temperature"],
+                ["Проверка лоджий", "Проверяем состояние и монтаж балконов", "balcony"],
+                
+              ].map(([title, text, image], index) => (
                 <article className="defect-card" key={title}>
                   <div className="defect-image">
+                    <img src={`/${image}.jpg`} alt={title} />
                     <span>{index + 1}</span>
                   </div>
                   <h3>{title}</h3>
@@ -342,12 +401,46 @@ export default function Home() {
 
             <div className="case-grid">
               {[
-                ["ЖК Южный парк", "42 дефекта: окна, откосы, электрика.", "184 000 ₽", "27 дней"],
-                ["ЖК Нова", "Неровный пол, вентиляция, трещины.", "312 000 ₽", "41 день"],
-                ["ЖК Солнечный", "Дверь, гидроизоляция, геометрия стен.", "96 000 ₽", "18 дней"],
-              ].map(([name, text, price, time]) => (
+                [
+                  "ЖК Сказочный Лес (Суварстроит)",
+                  "Предупреждали о плохой штукатурке",
+                  "184 000 ₽",
+                  "27 дней",
+                  "suvarstroit.jpg",
+                  "СУВАРСТРОИТ",
+                  "suvar",
+                  "Звонить",
+                ],
+                [
+                  "ЖК Светлая Долина (Ак Барс Дом)",
+                  "Выявили ошибки монтажа блоков",
+                  "312 000 ₽",
+                  "41 день",
+                  "akboarsdom.jpg",
+                  "Ак Барс Дом",
+                  "akbars",
+                  "Связаться",
+                ],
+                [
+                  "ЖК Зимний сад (ЖК Удачный)",
+                  "Проверили окна и стяжку",
+                  "96 000 ₽",
+                  "18 дней",
+                  "lucky.jpg",
+                  "ЖК Удачный",
+                  "udachny",
+                  "Обратиться",
+                ],
+              ].map(([name, text, price, time, image, logo, logoClass, label]) => (
                 <article className="case-card" key={name}>
-                  <div className="case-image"></div>
+                  <div className="case-image-wrapper">
+                    <img className="case-image" src={`/${image}`} alt={name} />
+                    {/* <img className="case-logo" src={`/${logo}`} alt="Логотип СТЭТ" /> */}
+
+                   
+                    <a href="tel:+79625507555" className="case-image-label">{label}</a>
+                  </div>
+
                   <div className="case-content">
                     <h3>{name}</h3>
                     <p>{text}</p>
@@ -366,10 +459,11 @@ export default function Home() {
                 </article>
               ))}
             </div>
+
           </div>
         </section>
 
-        <section className="section section--white">
+        {/* <section className="section section--white">
           <div className="container">
             <div className="section-title">
               <span className="pill">Отзывы</span>
@@ -391,15 +485,14 @@ export default function Home() {
                       <span>{complex}</span>
                     </div>
                   </div>
-                  <div className="stars">★★★★★</div>
                   <p>«{text}»</p>
                 </article>
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section className="section">
+        {/* <section className="section">
           <div className="container">
             <div className="trust-block">
               <div>
@@ -420,7 +513,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="section section--white" id="faq">
           <div className="container container--small">
@@ -455,18 +548,25 @@ export default function Home() {
           <a className="logo" href="#">
       
             <span>
-              <span className="logo__title">СТЕТ</span>
-              <span className="logo__subtitle">независимые экспертизы</span>
+              {/* <span className="logo__title">СТЕТ</span>
+              <span className="logo__subtitle">независимые экспертизы</span> */}
+
+              <div className="logoImageWrapper">
+                <Image
+                  className="logoImage"
+                  fill
+                  src="/logo.svg"
+                  alt="СТЭТ — строительные экспертизы"
+                />
+              </div>
             </span>
           </a>
 
           <div className="footer__links">
-            <span>+7 999 123-45-67</span>
-            <span>WhatsApp</span>
-            <span>Telegram</span>
-            <span>info@priemka-pro.ru</span>
-            <span>Политика конфиденциальности</span>
-            <span>Реквизиты компании</span>
+            <a href="tel:+79625507555">+7 962 550-75-55</a>
+            <a href="https://max.ru/">MAX</a>
+            <a href="mailto:stet-kazan@mail.ru">stet-kazan@mail.ru</a>
+
           </div>
         </div>
       </footer>
