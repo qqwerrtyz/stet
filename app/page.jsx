@@ -38,12 +38,17 @@ export default function Home() {
 
     // Телефон: клик показывает ссылку
     const phoneWrapper = document.querySelector('.phone-wrapper');
-    if(phoneWrapper) {
+    if (phoneWrapper) {
       const phone = phoneWrapper.querySelector('.phone');
       const overlay = phoneWrapper.querySelector('.phone-overlay');
-      if(overlay && phone) {
+
+      if (overlay && phone) {
         overlay.addEventListener('click', () => {
           phone.classList.add('active');
+
+          if (window.ym) {
+            window.ym(38267465, 'reachGoal', 'show_phone');
+          }
         });
       }
     }
