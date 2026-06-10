@@ -324,7 +324,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section" id="aktiDocuments">
           <div className="container">
             <div className="section-title">
               <span className="pill">Процесс</span>
