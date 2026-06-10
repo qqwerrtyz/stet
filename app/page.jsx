@@ -242,7 +242,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section" id="populyarnieDefecti">
           <div className="container">
             <div className="section-title">
               <span className="pill">Наглядная диагностика</span>
