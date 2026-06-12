@@ -59,7 +59,7 @@ export default function Home() {
     <>
       <header className="header">
         <div className="container header__inner">
-          <a className="logo" href="#" onClick={closeMenu}>
+          <a className="logo" href="/" onClick={closeMenu}>
           
             <span>
  

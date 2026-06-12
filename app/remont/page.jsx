@@ -218,7 +218,7 @@ export default function RepairLandingPage() {
     <>
       <header className="header">
         <div className="container header__inner">
-          <a className="logo" href="#" onClick={closeMenu}>
+          <a className="logo" href="/" onClick={closeMenu}>
             <span>
               <div className="logoImageWrapper">
                 <Image
