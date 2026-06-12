@@ -1437,6 +1437,7 @@ a.photo-card__label:active {
 }
 
 .repair-stage--accent {
+  z-index: 10;
   right: 28px;
   top: 210px;
   color: #fff;
